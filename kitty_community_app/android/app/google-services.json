@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "816665846900",
+    "firebase_url": "https://kitty-community-app-datn20231-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "kitty-community-app-datn20231",
+    "storage_bucket": "kitty-community-app-datn20231.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816665846900:android:5b94df3f974701cd741d21",
+        "android_client_info": {
+          "package_name": "com.hust.datn.kitty_community_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816665846900-j7g6sidgr57jef3shkouqkorhkn91pru.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzELTH0uazmaXd9mFToSp9jkwto2Nx920"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816665846900-j7g6sidgr57jef3shkouqkorhkn91pru.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
