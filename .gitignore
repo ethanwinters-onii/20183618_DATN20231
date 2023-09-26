@@ -1,1 +1,3 @@
 /data_and_models/data/download
+/data_and_models/models/CatClassification/work_dirs/efficentnetb7
+/data_and_models/models/CatClassification/work_dirs/mobilenetv2
