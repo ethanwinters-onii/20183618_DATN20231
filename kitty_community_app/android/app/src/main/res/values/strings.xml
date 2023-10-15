@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kitty Community App</string>
+    <string name="facebook_app_id">193480517084132</string>
+    <string name="fb_login_protocol_scheme">fb193480517084132</string>
+    <string name="facebook_client_token">7649b945b9c6b4a762af682929678ae9</string>
+</resources>

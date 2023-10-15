@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:kitty_community_app/app/core/base/main_layout.dart';
 import 'package:kitty_community_app/app/core/theme/color_theme.dart';
+import 'package:kitty_community_app/app/core/utils/extensions/logger_extension.dart';
+import 'package:kitty_community_app/app/core/utils/helpers/rive_utils.dart';
 import 'package:kitty_community_app/app/core/values/constants.dart';
 import 'package:kitty_community_app/app/core/values/languages/key_language.dart';
 import 'package:kitty_community_app/app/global_widgets/app_button.dart';
@@ -19,6 +23,52 @@ class LoginView extends GetView<LoginController> {
     return MainLayout<LoginController>(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
+      indicator: Container(
+        color: Colors.black.withOpacity(0.5),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Obx(() => controller.isShowLoading.value
+                  ? Transform.scale(
+                      scale: 0.25,
+                      child: RiveAnimation.asset(
+                        AssetsContants.check,
+                        onInit: (artboard) {
+                          logger.d("2");
+                          StateMachineController stateMachineController =
+                              RiveUtils.getRiveController(artboard);
+                          controller.check = stateMachineController
+                              .findSMI("Check") as SMITrigger;
+                          controller.error = stateMachineController
+                              .findSMI("Error") as SMITrigger;
+                          controller.reset = stateMachineController
+                              .findSMI("Reset") as SMITrigger;
+                        },
+                      ))
+                  : const SizedBox()),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Obx(() => controller.isShowConfetti.value
+                  ? Transform.scale(
+                      scale: 2,
+                      child: RiveAnimation.asset(
+                        AssetsContants.confetti,
+                        onInit: (artboard) {
+                          logger.d("1");
+                          StateMachineController stateMachineController =
+                              RiveUtils.getRiveController(artboard);
+                          controller.confetti = stateMachineController
+                              .findSMI("Trigger explosion") as SMITrigger;
+                        },
+                      ),
+                    )
+                  : const SizedBox()),
+            ),
+          ],
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 4.w),
         child: Column(
@@ -49,8 +99,7 @@ class LoginView extends GetView<LoginController> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.dialog(
-                        const SignUpView(),
+                    Get.dialog(const SignUpView(),
                         barrierDismissible: false,
                         transitionCurve: Curves.easeInOut);
                   },
@@ -126,7 +175,9 @@ class LoginView extends GetView<LoginController> {
             ),
             Center(
               child: AppButton(
-                  callback: () {},
+                  callback: () {
+                    controller.handleLoginWithEmailAndPassword();
+                  },
                   width: 45.w,
                   height: 4.h,
                   label: KeyLanguage.sign_in.tr),
@@ -134,8 +185,8 @@ class LoginView extends GetView<LoginController> {
             SizedBox(
               height: 2.h,
             ),
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Expanded(
                     child: Divider(
                   thickness: 1,
@@ -158,7 +209,9 @@ class LoginView extends GetView<LoginController> {
             ),
             Center(
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.handleLoginWithGoogle();
+                  },
                   style: ElevatedButton.styleFrom(fixedSize: Size(70.w, 4.h)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -177,7 +230,9 @@ class LoginView extends GetView<LoginController> {
             ),
             Center(
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.handleLoginWithFacebook();
+                  },
                   style: ElevatedButton.styleFrom(fixedSize: Size(70.w, 4.h)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -205,5 +260,3 @@ class LoginView extends GetView<LoginController> {
     );
   }
 }
-
-

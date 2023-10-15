@@ -15,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "816665846900-j7g6sidgr57jef3shkouqkorhkn91pru.apps.googleusercontent.com",
+          "client_id": "816665846900-b5nhmok9qsfs8qf5c9nq8d39drbhiljd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -28,8 +28,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "816665846900-j7g6sidgr57jef3shkouqkorhkn91pru.apps.googleusercontent.com",
+              "client_id": "816665846900-b5nhmok9qsfs8qf5c9nq8d39drbhiljd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "816665846900-0vbjf0ukgt42t57cnqghd1oil1uf6q2r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hust.datn.kittyCommunityApp"
+              }
             }
           ]
         }

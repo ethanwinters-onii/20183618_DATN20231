@@ -31,4 +31,24 @@ class KeyLanguage {
   static const String confirm_password = "confirm_password";
   static const String create_new_account = "create_new_account";
   static const String already_have_account = "already_have_account";
+  static const String invalid_registration_email = "invalid_registration_email";
+  static const String register_successfully = "register_successfully";
+  static const String account_already_exisited = "account_already_exisited";
+  static const String password_can_not_be_empty = "password_can_not_be_empty";
+  static const String password_verifier_is_not_correct =
+      "password_verifier_is_not_correct";
+  static const String full_name_can_not_be_empty = "full_name_can_not_be_empty";
+  static const String sign_up_successfully_please_verify_your_email_to_sign_in =
+      "sign_up_successfully_please_verify_your_email_to_sign_in";
+  static const String email_is_not_verified = "email_is_not_verified";
+
+  // pet-detail
+  static const String weight = "weight";
+  static const String origin = "origin";
+  static const String appearance = "appearance";
+  static const String description = "description";
+  static const String temperament = "temperament";
+  static const String longevity = "longevity";
+  static const String price = "price";
+  static const String years = "years";
 }

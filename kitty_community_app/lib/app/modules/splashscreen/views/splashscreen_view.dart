@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:kitty_community_app/app/core/utils/extensions/logger_extension.dart';
 import 'package:kitty_community_app/app/core/values/constants.dart';
 import 'package:kitty_community_app/app/core/values/languages/key_language.dart';
 import 'package:kitty_community_app/app/global_widgets/app_button.dart';
@@ -48,7 +50,12 @@ class SplashscreenView extends GetView<SplashscreenController> {
             ),
             AppButton(
                 callback: () {
-                  Get.toNamed(Routes.LOGIN);
+                  if (FirebaseAuth.instance.currentUser != null) {
+                    // logger.i(FirebaseAuth.instance.currentUser);
+                    Get.offAllNamed(Routes.WRAP, arguments: [FirebaseAuth.instance.currentUser]);
+                  } else {
+                    Get.toNamed(Routes.LOGIN);
+                  }
                 },
                 width: 50.w,
                 height: 7.h,

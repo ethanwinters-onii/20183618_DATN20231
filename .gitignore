@@ -1,3 +1,6 @@
 /data_and_models/data/download
 /data_and_models/models/CatClassification/work_dirs/efficentnetb7
 /data_and_models/models/CatClassification/work_dirs/mobilenetv2
+/data_and_models/data/cat_images
+/data_and_models/data/fb_storage
+/data_and_models/data/.ipynb_checkpoints

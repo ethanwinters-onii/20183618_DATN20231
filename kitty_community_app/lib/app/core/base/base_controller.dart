@@ -1,5 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:kitty_community_app/app/core/values/enums/status.dart';
 import 'package:get/get.dart';
+import 'package:kitty_community_app/app/core/values/languages/key_language.dart';
+import 'package:kitty_community_app/app/global_widgets/custom_dialog.dart';
+import 'package:sizer/sizer.dart';
 
 class BaseController extends GetxController {
   Rx<Status> status = Status.loading.obs;
@@ -32,6 +36,16 @@ class BaseController extends GetxController {
   void onClose() {
     // TODO: implement onClose
     super.onClose();
+  }
+
+  void showErrorDialog(String message) async {
+    return Get.dialog(CustomDialog(
+      title: KeyLanguage.error.tr.toUpperCase(),
+      content: Text(
+        message,
+        style: TextStyle(fontSize: 14.sp, color: Colors.black),
+      ),
+    ));
   }
   
 }

@@ -61,8 +61,7 @@ class SignUpView extends GetView<LoginController> {
               Align(
                 alignment: Alignment.center,
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 4.h),
+                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 4.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -82,6 +81,8 @@ class SignUpView extends GetView<LoginController> {
                         ],
                       ),
                       TextFormField(
+                        controller:
+                            controller.registerFullnameEdittingController,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -91,17 +92,33 @@ class SignUpView extends GetView<LoginController> {
                             ),
                             labelText: KeyLanguage.full_name.tr),
                       ),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            prefixIcon: Icon(
-                              Icons.email,
-                              color: Colors.black,
-                            ),
-                            labelText: "Email"),
+                      Obx(
+                        () => TextFormField(
+                          controller:
+                              controller.registerEmailEdittingController,
+                          decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              prefixIcon: const Icon(
+                                Icons.email,
+                                color: Colors.black,
+                              ),
+                              suffixIcon:
+                                  controller.isAvailableResgisterEmail.value
+                                      ? const Icon(
+                                          Icons.check_circle,
+                                          color: Colors.green,
+                                        )
+                                      : null,
+                              labelText: "Email"),
+                          onChanged: (value) {
+                            controller.onChangeRegisterEmail();
+                          },
+                        ),
                       ),
                       TextFormField(
+                        controller:
+                            controller.registerPasswordEdittingController,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -112,6 +129,8 @@ class SignUpView extends GetView<LoginController> {
                             labelText: KeyLanguage.password.tr),
                       ),
                       TextFormField(
+                        controller: controller
+                            .registerConfirmPasswordEdittingController,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -128,25 +147,28 @@ class SignUpView extends GetView<LoginController> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    controller.signUpWithEmailAndPassword();
+                  },
                   child: Container(
                     width: 90.w,
                     height: 6.h,
                     decoration: const BoxDecoration(
-                      gradient: LinearGradient(
+                        gradient: LinearGradient(
                           begin: Alignment.bottomRight,
                           end: Alignment.topLeft,
                           colors: [Color(0xFFFE87AB), Color(0xFFDA4873)],
                         ),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(16),
-                        bottomRight: Radius.circular(16)
-                      )
-                    ),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(16),
+                            bottomRight: Radius.circular(16))),
                     child: Center(
                       child: Text(
                         KeyLanguage.sign_up.tr,
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 14.sp),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14.sp),
                       ),
                     ),
                   ),

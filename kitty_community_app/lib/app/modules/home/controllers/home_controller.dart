@@ -1,23 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:kitty_community_app/app/core/base/base_controller.dart';
+import 'package:kitty_community_app/app/core/values/enums/status.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+class HomeController extends BaseController {
+  final User user = Get.arguments[0];
 
   @override
-  void onReady() {
-    super.onReady();
+  Future<void> initialData() {
+    // TODO: implement initialData
+    setStatus(Status.success);
+    return super.initialData();
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

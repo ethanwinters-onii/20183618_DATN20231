@@ -1,7 +1,7 @@
 import 'package:kitty_community_app/app/core/values/languages/key_language.dart';
 
 const Map<String, String> en = {
-  KeyLanguage.error: "Error!",
+  KeyLanguage.error: "Error",
   KeyLanguage.c200: "Handle request successfully.",
   KeyLanguage.c400: "Your request is false, please try again",
   KeyLanguage.c404: "404 Not Found",
@@ -26,5 +26,22 @@ const Map<String, String> en = {
   KeyLanguage.full_name: "Full name",
   KeyLanguage.confirm_password: "Confirm password",
   KeyLanguage.create_new_account: "Create new account",
-  KeyLanguage.already_have_account: "Already have account?"
+  KeyLanguage.already_have_account: "Already have account?",
+  KeyLanguage.invalid_registration_email: "Invalid email",
+  KeyLanguage.register_successfully: "Register new account successfully.",
+  KeyLanguage.account_already_exisited: "This account already existed",
+  KeyLanguage.password_can_not_be_empty: "Password can not be empty",
+  KeyLanguage.password_verifier_is_not_correct: "Password verifier is not correct",
+  KeyLanguage.full_name_can_not_be_empty: "Full name can not be empty",
+  KeyLanguage.sign_up_successfully_please_verify_your_email_to_sign_in: "Sign up successfully, please verify your email to sign in.",
+  KeyLanguage.email_is_not_verified: "Email is not verified",
+
+  KeyLanguage.weight: "Weight",
+  KeyLanguage.origin: "Origin",
+  KeyLanguage.appearance: "Appearance",
+  KeyLanguage.description: "Other information",
+  KeyLanguage.temperament: "Temperament",
+  KeyLanguage.longevity: "Longevity",
+  KeyLanguage.price: "Price",
+  KeyLanguage.years: "years",
 };

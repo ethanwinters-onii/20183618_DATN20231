@@ -50,7 +50,9 @@ class MainLayout<T extends BaseController> extends StatelessWidget {
                 () => Visibility(
                   visible: Get.find<T>().getStatus() == Status.loading ||
                       Get.find<T>().getStatus() == Status.waiting,
-                  child: indicator ?? const SizedBox.shrink(),
+                  child: indicator ?? Container(
+                    child: const Center(child: CircularProgressIndicator()),
+                  ),
                 ),
               ),
             ),
