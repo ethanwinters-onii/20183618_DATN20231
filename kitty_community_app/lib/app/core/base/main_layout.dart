@@ -10,7 +10,7 @@ class MainLayout<T extends BaseController> extends StatelessWidget {
     this.withImageBackground = false,
     required this.child,
     this.onClick,
-    this.backgroundColor = Colors.transparent,
+    this.backgroundColor = Colors.white,
     Key? key,
     this.resizeToAvoidBottomInset,
     this.imageBackground,

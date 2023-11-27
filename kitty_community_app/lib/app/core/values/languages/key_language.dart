@@ -41,6 +41,16 @@ class KeyLanguage {
   static const String sign_up_successfully_please_verify_your_email_to_sign_in =
       "sign_up_successfully_please_verify_your_email_to_sign_in";
   static const String email_is_not_verified = "email_is_not_verified";
+  static const String notice = "notice";
+
+  // update-profile
+  static const String update_profile = "update_profile";
+  static const String date_of_birth = "date_of_birth";
+  static const String about_me = "about_me";
+  static const String confirm = "confirm";
+  static const String skip = "skip";
+  static const String take_a_new_photo = "take_a_new_photo";
+  static const String select_from_gallery = "select_from_gallery";
 
   // pet-detail
   static const String weight = "weight";
@@ -51,4 +61,13 @@ class KeyLanguage {
   static const String longevity = "longevity";
   static const String price = "price";
   static const String years = "years";
+
+  // create new post
+  static const String hi = "hi";
+  static const String post = "post";
+  static const String how_are_you_today = "how_are_you_today";
+  static const String create_new_post = "create_new_post";
+  static const String have_something_to_share_with_the_community = "have_something_to_share_with_the_community";
+  static const String photo = "photo";
+  static const String video = "video";
 }

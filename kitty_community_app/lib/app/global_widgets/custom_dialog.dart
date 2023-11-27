@@ -4,8 +4,9 @@ import 'package:kitty_community_app/app/core/theme/color_theme.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomDialog extends StatelessWidget {
-  const CustomDialog({super.key, required this.title, required this.content});
+  CustomDialog({super.key, this.color, required this.title, required this.content});
 
+  Color? color;
   final String title;
   final Widget content;
 
@@ -20,8 +21,8 @@ class CustomDialog extends StatelessWidget {
           children: [
             Container(
               height: 5.h,
-              decoration: const BoxDecoration(
-                color: Colors.red
+              decoration: BoxDecoration(
+                color: color ?? Colors.red
               ),
               child: Center(
                 child: Text(

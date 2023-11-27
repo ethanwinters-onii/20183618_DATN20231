@@ -44,6 +44,19 @@ class BaseController extends GetxController {
       content: Text(
         message,
         style: TextStyle(fontSize: 14.sp, color: Colors.black),
+        textAlign: TextAlign.center,
+      ),
+    ));
+  }
+
+  void showSuccessDialog(String message) async {
+    return Get.dialog(CustomDialog(
+      title: KeyLanguage.notice.tr.toUpperCase(),
+      color: Colors.lightBlueAccent,
+      content: Text(
+        message,
+        style: TextStyle(fontSize: 14.sp, color: Colors.black),
+        textAlign: TextAlign.center,
       ),
     ));
   }

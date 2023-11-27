@@ -35,6 +35,15 @@ const Map<String, String> en = {
   KeyLanguage.full_name_can_not_be_empty: "Full name can not be empty",
   KeyLanguage.sign_up_successfully_please_verify_your_email_to_sign_in: "Sign up successfully, please verify your email to sign in.",
   KeyLanguage.email_is_not_verified: "Email is not verified",
+  KeyLanguage.notice: "Notice",
+
+  KeyLanguage.update_profile: "Update profile",
+  KeyLanguage.date_of_birth: "Birthday",
+  KeyLanguage.about_me: "About me",
+  KeyLanguage.confirm: "Confirm",
+  KeyLanguage.skip: "Skip",
+  KeyLanguage.take_a_new_photo: "Take a new photo",
+  KeyLanguage.select_from_gallery: "Select from gallery",
 
   KeyLanguage.weight: "Weight",
   KeyLanguage.origin: "Origin",

@@ -18,7 +18,7 @@ extension DateTimeExtension on DateTime {
     return DateFormat("yyyy-MM-dd HH:mm:ss").format(this);
   }
 
-  String toCustomFormat() {
-    return DateFormat("HH:mm dd/MM/yyyy").format(this);
+  String toCustomFormat([String? format]) {
+    return DateFormat(format ?? "HH:mm dd/MM/yyyy").format(this);
   }
 }

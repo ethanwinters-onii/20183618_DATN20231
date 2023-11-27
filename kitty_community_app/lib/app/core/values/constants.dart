@@ -32,6 +32,9 @@ class AssetsContants {
 
   // img
   static const String splash_img = "assets/images/splash_img.jpg";
+  static const String img_bg = "assets/images/img_bg.jpeg";
+  static const String img_home_bottom_sheet =
+      "assets/images/img_home_bottom_sheet.png";
 
   // icon
   static const String ic_google = "assets/icons/google.png";
@@ -74,4 +77,22 @@ List<RiveAsset> bottomNavs = [
       artboard: "BELL",
       stateMachineName: "BELL_Interactivity",
       title: "Bell"),
+];
+
+List<RiveAsset> sideMenus = [
+  RiveAsset(
+      src: AssetsContants.icons,
+      artboard: "USER",
+      stateMachineName: "USER_interactivity",
+      title: "Profile"),
+  RiveAsset(
+      src: AssetsContants.icons,
+      artboard: "LIKE/STAR",
+      stateMachineName: "STAR_Interactivity",
+      title: "Favorite"),
+  RiveAsset(
+      src: AssetsContants.icons,
+      artboard: "SETTINGS",
+      stateMachineName: "SETTINGS_Interactivity",
+      title: "Log out"),
 ];

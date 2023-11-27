@@ -50,12 +50,7 @@ class SplashscreenView extends GetView<SplashscreenController> {
             ),
             AppButton(
                 callback: () {
-                  if (FirebaseAuth.instance.currentUser != null) {
-                    // logger.i(FirebaseAuth.instance.currentUser);
-                    Get.offAllNamed(Routes.WRAP, arguments: [FirebaseAuth.instance.currentUser]);
-                  } else {
-                    Get.toNamed(Routes.LOGIN);
-                  }
+                  controller.onGetStarted();
                 },
                 width: 50.w,
                 height: 7.h,

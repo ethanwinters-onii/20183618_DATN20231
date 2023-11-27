@@ -63,7 +63,7 @@ class ConsoleOutput extends LogOutput {
     for (var line in event.lines) {
       final message =
           '$white${event.origin.time.toString().split(" ")[1]} $end$start[$type]  $line$end';
-      log(message, name: "PVOIL_STATION");
+      log(message, name: "PET_COMMUNITY");
     }
   }
 }

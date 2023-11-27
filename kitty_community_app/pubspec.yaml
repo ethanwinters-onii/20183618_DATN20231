@@ -30,6 +30,7 @@ dependencies:
   flutter_facebook_auth: ^6.0.2
   google_sign_in: ^6.1.5
   flutter_local_notifications: ^14.1.1
+  firebase_storage: ^11.5.0
 
   # for format data, get locale
   intl: ^0.18.1
@@ -44,6 +45,8 @@ dependencies:
 
   # for pickimage from gallery or camera
   image_picker: ^0.8.7+5
+  flutter_image_compress: ^2.1.0
+  path_provider: ^2.1.1
 
   # for load image .svg
   flutter_svg: ^2.0.5
@@ -61,6 +64,7 @@ dependencies:
   flex_color_scheme: ^7.0.5
   sizer: ^2.0.15
   carousel_slider: ^4.2.1
+  
 
 dev_dependencies: 
   flutter_lints: 2.0.3

@@ -1,12 +1,25 @@
+import 'package:hive/hive.dart';
+part 'account_info.g.dart';
+
+@HiveType(typeId: 0)
 class AccountInfo {
+    @HiveField(0)
     String? userId;
+    @HiveField(1)
     String? name;
+    @HiveField(2)
     bool? onFirstLogin;
+    @HiveField(3)
     String? avatar;
+    @HiveField(4)
     String? description;
+    @HiveField(5)
     String? dateOfBirth;
+    @HiveField(6)
     String? deviceToken;
+    @HiveField(7)
     List<String>? follower;
+    @HiveField(8)
     List<String>? following;
 
     AccountInfo({

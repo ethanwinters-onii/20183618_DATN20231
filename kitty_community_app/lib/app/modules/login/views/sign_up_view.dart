@@ -119,6 +119,7 @@ class SignUpView extends GetView<LoginController> {
                       TextFormField(
                         controller:
                             controller.registerPasswordEdittingController,
+                        obscureText: true,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -131,6 +132,7 @@ class SignUpView extends GetView<LoginController> {
                       TextFormField(
                         controller: controller
                             .registerConfirmPasswordEdittingController,
+                        obscureText: true,
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,

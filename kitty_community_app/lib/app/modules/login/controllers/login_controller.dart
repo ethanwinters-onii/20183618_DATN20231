@@ -6,9 +6,10 @@ import 'package:get/get.dart';
 import 'package:kitty_community_app/app/core/base/base_controller.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:kitty_community_app/app/core/utils/extensions/logger_extension.dart';
+import 'package:kitty_community_app/app/core/utils/helpers/get_account_local.dart';
 import 'package:kitty_community_app/app/core/values/enums/status.dart';
 import 'package:kitty_community_app/app/core/values/languages/key_language.dart';
-import 'package:kitty_community_app/app/data/models/user_model/user.dart';
+import 'package:kitty_community_app/app/data/models/user_model/account_info.dart';
 import 'package:kitty_community_app/app/data/providers/firebase/firebase_constants.dart';
 import 'package:kitty_community_app/app/data/providers/firebase/firebase_provider.dart';
 import 'package:kitty_community_app/app/global_widgets/custom_dialog.dart';
@@ -16,6 +17,9 @@ import 'package:kitty_community_app/app/routes/app_pages.dart';
 import 'package:rive/rive.dart';
 import 'package:sizer/sizer.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import '../../../core/utils/local_storage/hive_storage.dart';
+import '../../../core/utils/local_storage/local_db_constants.dart';
 
 class LoginController extends BaseController {
   final TextEditingController emailEdittingController = TextEditingController();
@@ -82,11 +86,25 @@ class LoginController extends BaseController {
             onFirstLogin: true,
             deviceToken: token,
             avatar: userCredential?.additionalUserInfo?.profile?["picture"]
-                ["data"]["url"]);
+                ["data"]["url"],
+            following: userCredential?.user?.uid == null ? [] : [userCredential!.user!.uid]
+        );
         await FirebaseProvider.createUser(newAccount);
-        Get.offAllNamed(Routes.WRAP, arguments: [userCredential?.user]);
+        AccountLocalHelper.save(newAccount);
+        Get.offAllNamed(Routes.UPDATE_PROFILE);
       } else {
-        Get.offAllNamed(Routes.WRAP, arguments: [userCredential?.user]);
+        final accountInfo = await FirebaseProvider.getUserById(userCredential?.user?.uid ?? "");
+        if (accountInfo != null) {
+          logger.d(accountInfo.toJson());
+          AccountLocalHelper.save(accountInfo);
+          if (accountInfo.onFirstLogin == true) {
+            Get.offAllNamed(Routes.UPDATE_PROFILE);
+          } else {
+            Get.offAllNamed(Routes.WRAP);
+          }
+        } else {
+          showErrorDialog(KeyLanguage.c500.tr);
+        }
       }
     });
   }
@@ -128,11 +146,25 @@ class LoginController extends BaseController {
               name: userCredential.user?.displayName,
               onFirstLogin: true,
               deviceToken: token,
-              avatar: userCredential.additionalUserInfo?.profile?["picture"]);
+              avatar: userCredential.additionalUserInfo?.profile?["picture"],
+              following: userCredential?.user?.uid == null ? [] : [userCredential!.user!.uid]
+          );
           await FirebaseProvider.createUser(newAccount);
-          Get.offAllNamed(Routes.WRAP, arguments: [userCredential.user]);
+          AccountLocalHelper.save(newAccount);
+          Get.offAllNamed(Routes.UPDATE_PROFILE);
         } else {
-          Get.offAllNamed(Routes.WRAP, arguments: [userCredential.user]);
+          final accountInfo = await FirebaseProvider.getUserById(userCredential?.user?.uid ?? "");
+          if (accountInfo != null) {
+            logger.d(accountInfo.toJson());
+            AccountLocalHelper.save(accountInfo);
+            if (accountInfo.onFirstLogin == true) {
+              Get.offAllNamed(Routes.UPDATE_PROFILE);
+            } else {
+              Get.offAllNamed(Routes.WRAP);
+            }
+          } else {
+            showErrorDialog(KeyLanguage.c500.tr);
+          }
         }
       }
     });
@@ -204,6 +236,7 @@ class LoginController extends BaseController {
             Future.delayed(const Duration(seconds: 1), () {
               isShowConfetti.value = false;
               setStatus(Status.success);
+              showSuccessDialog(KeyLanguage.sign_up_successfully_please_verify_your_email_to_sign_in.tr);
             });
           });
         });
@@ -254,19 +287,43 @@ class LoginController extends BaseController {
               name: registerFullnameEdittingController.text.trim(),
               onFirstLogin: true,
               deviceToken: token,
+              following: credential.user?.uid == null ? [] : [credential.user!.uid]
             );
             await FirebaseProvider.createUser(newAccount);
+            AccountLocalHelper.save(newAccount);
+            Get.offAllNamed(Routes.UPDATE_PROFILE);
+          } else {
+            final accountInfo = await FirebaseProvider.getUserById(credential.user?.uid ?? "");
+            if (accountInfo != null) {
+              logger.d(accountInfo.toJson());
+              AccountLocalHelper.save(accountInfo);
+              if (accountInfo.onFirstLogin == true) {
+                check.fire();
+                Future.delayed(const Duration(milliseconds: 1500), () {
+                  isShowLoading.value = false;
+                  confetti.fire();
+                  Future.delayed(const Duration(seconds: 1), () {
+                    isShowConfetti.value = false;
+                    setStatus(Status.success);
+                    Get.offAllNamed(Routes.UPDATE_PROFILE);
+                  });
+                });
+              } else {
+                check.fire();
+                Future.delayed(const Duration(milliseconds: 1500), () {
+                  isShowLoading.value = false;
+                  confetti.fire();
+                  Future.delayed(const Duration(seconds: 1), () {
+                    isShowConfetti.value = false;
+                    setStatus(Status.success);
+                    Get.offAllNamed(Routes.WRAP);
+                  });
+                });
+              }
+            } else {
+              showErrorDialog(KeyLanguage.c500.tr);
+            }
           }
-          check.fire();
-          Future.delayed(const Duration(milliseconds: 1500), () {
-            isShowLoading.value = false;
-            confetti.fire();
-            Future.delayed(const Duration(seconds: 1), () {
-              isShowConfetti.value = false;
-              setStatus(Status.success);
-              Get.offAllNamed(Routes.WRAP, arguments: [credential.user]);
-            });
-          });
         } else {
           credential.user?.sendEmailVerification();
           logger.d("Not Authorized");

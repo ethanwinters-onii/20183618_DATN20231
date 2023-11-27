@@ -36,6 +36,15 @@ const Map<String, String> vi = {
   KeyLanguage.full_name_can_not_be_empty: "Tên không được bỏ trống.",
   KeyLanguage.sign_up_successfully_please_verify_your_email_to_sign_in: "Đăng ký thành công. Vui lòng xác thực email để đăng nhập",
   KeyLanguage.email_is_not_verified: "Email chưa được xác thực.",
+  KeyLanguage.notice: "Thông báo",
+
+  KeyLanguage.update_profile: "Cập nhật thông tin",
+  KeyLanguage.date_of_birth: "Ngày sinh",
+  KeyLanguage.about_me: "Mô tả bản thân",
+  KeyLanguage.confirm: "Xác nhận",
+  KeyLanguage.skip: "Bỏ qua",
+  KeyLanguage.take_a_new_photo: "Chụp ảnh",
+  KeyLanguage.select_from_gallery: "Chọn từ thư viện",
 
   KeyLanguage.weight: "Cân nặng",
   KeyLanguage.origin: "Nguồn gốc",

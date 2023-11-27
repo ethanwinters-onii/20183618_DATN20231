@@ -23,8 +23,8 @@ extension StringExtension on String {
   }
 
   // to DateTime datatype, sample: "2023-05-30 06:25:58.0"
-  DateTime toDateTime() {
-    return DateFormat("yyyy-MM-dd HH:mm:ss").parse(this);
+  DateTime toDateTime([String? formatDate]) {
+    return DateFormat(formatDate ?? "yyyy-MM-dd HH:mm:ss").parse(this);
   }
 
   // from QRTime to DateTime: sample: yyyyMMddHHmmss

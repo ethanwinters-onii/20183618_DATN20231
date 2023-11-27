@@ -11,6 +11,7 @@ import 'package:kitty_community_app/app/modules/chat/views/chat_view.dart';
 import 'package:kitty_community_app/app/modules/home/views/home_view.dart';
 import 'package:kitty_community_app/app/modules/notification/views/notification_view.dart';
 import 'package:kitty_community_app/app/modules/p_search/views/p_search_view.dart';
+import 'package:kitty_community_app/app/modules/wrap/widgets/side_menu.dart';
 import 'package:kitty_community_app/app/modules/wrap/widgets/animated_bar.dart';
 import 'package:kitty_community_app/app/modules/wrap/widgets/fab_expandable.dart';
 import 'package:kitty_community_app/app/modules/wrap/widgets/rps_custom_painter.dart';
@@ -122,7 +123,7 @@ class WrapView extends GetView<WrapController> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -136,9 +137,9 @@ Widget _getPage(int index) {
     case 1:
       return const PSearchView();
     case 2:
-      return const NotificationView();
-    case 3:
       return const ChatView();
+    case 3:
+      return const NotificationView();
   }
   return Container();
 }

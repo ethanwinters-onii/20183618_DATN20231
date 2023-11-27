@@ -20,7 +20,7 @@ class RPSCustomPainter extends CustomPainter {
     path0.lineTo(size.width, size.height);
     path0.lineTo(0, size.height * 0.9997000);
     path0.lineTo(0, 0);
-    canvas.drawShadow(path0, Colors.black, 10, true);
+    canvas.drawShadow(path0, Colors.black, 20, true);
     path0.close();
 
     canvas.drawPath(path0, paint0);
