@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:kitty_community_app/app/core/base/main_layout.dart';
 import 'package:kitty_community_app/app/core/theme/color_theme.dart';
 import 'package:kitty_community_app/app/core/utils/extensions/logger_extension.dart';
 import 'package:kitty_community_app/app/core/utils/helpers/rive_utils.dart';
 import 'package:kitty_community_app/app/core/values/constants.dart';
+import 'package:kitty_community_app/app/data/providers/firebase/firebase_provider.dart';
 import 'package:kitty_community_app/app/modules/chat/views/chat_view.dart';
 import 'package:kitty_community_app/app/modules/home/views/home_view.dart';
 import 'package:kitty_community_app/app/modules/notification/views/notification_view.dart';
@@ -25,8 +27,8 @@ class WrapView extends GetView<WrapController> {
   const WrapView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
+    return MainLayout<WrapController>(
+      child: Stack(
         children: [
           Obx(() => _getPage(controller.currentTab.value)),
           Align(
@@ -68,23 +70,71 @@ class WrapView extends GetView<WrapController> {
                                 SizedBox(
                                   width: 48,
                                   height: 48,
-                                  child: ColorFiltered(
-                                    colorFilter: const ColorFilter.mode(
-                                        primaryColor, BlendMode.modulate),
-                                    child: RiveAnimation.asset(
-                                      bottomNavs[index].src,
-                                      artboard: bottomNavs[index].artboard,
-                                      onInit: (artboard) {
-                                        StateMachineController riveController =
-                                            RiveUtils.getRiveController(
-                                                artboard,
-                                                stateMachineName:
-                                                    bottomNavs[index]
-                                                        .stateMachineName);
-                                        bottomNavs[index].input = riveController
-                                            .findSMI("active") as SMIBool;
-                                      },
-                                    ),
+                                  child: Stack(
+                                    children: [
+                                      ColorFiltered(
+                                        colorFilter: const ColorFilter.mode(
+                                            primaryColor, BlendMode.modulate),
+                                        child: RiveAnimation.asset(
+                                          bottomNavs[index].src,
+                                          artboard: bottomNavs[index].artboard,
+                                          onInit: (artboard) {
+                                            StateMachineController
+                                                riveController =
+                                                RiveUtils.getRiveController(
+                                                    artboard,
+                                                    stateMachineName:
+                                                        bottomNavs[index]
+                                                            .stateMachineName);
+                                            bottomNavs[index].input =
+                                                riveController.findSMI("active")
+                                                    as SMIBool;
+                                          },
+                                        ),
+                                      ),
+                                      if (index == 3)
+                                        Positioned(
+                                          top: 4,
+                                          right: 4,
+                                          child: Container(
+                                            width: 20,
+                                            height: 20,
+                                            decoration: BoxDecoration(
+                                                color: Colors.red,
+                                                shape: BoxShape.circle),
+                                            child: Center(
+                                              child: StreamBuilder(
+                                                  stream: FirebaseProvider
+                                                      .streamUserNotification(),
+                                                  builder: (context, snapshot) {
+                                                    switch (snapshot
+                                                        .connectionState) {
+                                                      case ConnectionState.none:
+                                                      case ConnectionState
+                                                            .waiting:
+                                                        return const SizedBox();
+                                                      case ConnectionState
+                                                            .active:
+                                                      case ConnectionState.done:
+                                                        final data =
+                                                            snapshot.data?.docs;
+
+                                                        return Text(
+                                                          '${data?.length ?? "0"}',
+                                                          style: const TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 10,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        );
+                                                    }
+                                                  }),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -105,7 +155,7 @@ class WrapView extends GetView<WrapController> {
               children: [
                 ActionButton(
                   onPressed: () {
-                    
+                    controller.handleTakePhoto();
                   },
                   icon: const Icon(Icons.photo_camera),
                 ),
@@ -117,7 +167,8 @@ class WrapView extends GetView<WrapController> {
                 ),
                 ActionButton(
                   onPressed: () {
-                    print("abcffasf");
+                    // print("abcffasf");
+                    controller.handlePickImage();
                   },
                   icon: const Icon(Icons.image_search),
                 ),

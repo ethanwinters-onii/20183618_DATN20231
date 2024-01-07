@@ -23,12 +23,17 @@ class HomeController extends BaseController {
   }
 
   void getAllPost() async {
-    final result = await FirebaseProvider.getAllFriendsPost(accountInfo.following ?? []);
+    final result =
+        await FirebaseProvider.getAllFriendsPost(accountInfo.following ?? []);
     if (result != null) {
       posts.addAll(result);
       setStatus(Status.success);
     } else {
       setStatus(Status.success);
     }
+  }
+
+  void handleLikeAPost(PostModel post) async {
+    await FirebaseProvider.updateLikeAPost(post, accountInfo.userId ?? "-");
   }
 }

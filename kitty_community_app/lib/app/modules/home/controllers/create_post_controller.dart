@@ -33,7 +33,7 @@ class CreatePostController extends BaseController {
   void handleSelectPhoto() async {
     Get.bottomSheet(
       AppBottomSheet(
-        height: 20.h,
+        height: 25.h,
         child: ImagePickerBottomSheet(
           onTakePhoto: handleTakePhoto,
           onPickGallery: handlePickImage,
@@ -78,7 +78,8 @@ class CreatePostController extends BaseController {
         hearts: [],
         createdAt: DateTime.now().toAPIFormat(),
         userAvatar: accountInfo.avatar,
-        createdBy: accountInfo.name
+        createdBy: accountInfo.name,
+        noComment: 0
       );
       await FirebaseProvider.createNewPost(postModel);
       setStatus(Status.success);

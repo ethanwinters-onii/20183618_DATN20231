@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:kitty_community_app/app/core/base/main_layout.dart';
 import 'package:kitty_community_app/app/core/theme/color_theme.dart';
 import 'package:kitty_community_app/app/core/values/languages/key_language.dart';
+import 'package:kitty_community_app/app/data/models/user_model/user_role.dart';
 import 'package:kitty_community_app/app/global_widgets/app_button.dart';
+import 'package:kitty_community_app/app/modules/update_profile/widgets/custom_radio_listtile.dart';
 import 'package:kitty_community_app/app/modules/update_profile/widgets/profile_text_field.dart';
 import 'package:sizer/sizer.dart';
 
@@ -93,6 +95,61 @@ class UpdateProfileView extends GetView<UpdateProfileController> {
                   prefixIcon: const Icon(
                     Icons.description,
                     color: secondaryColor,
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  "You are:",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: Colors.black54, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    controller.onChangeRole(controller.userRoles[0]);
+                  },
+                  child: Obx(
+                    () => CustomRadioListTile<UserRole>(
+                        value: controller.userRoles[0],
+                        groupValue: controller.selectedRole.value,
+                        onChange: (UserRole? type) {
+                          controller.onChangeRole(type!);
+                        },
+                        label: controller.userRoles[0].roleName),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    controller.onChangeRole(controller.userRoles[1]);
+                  },
+                  child: Obx(
+                    () => CustomRadioListTile<UserRole>(
+                        value: controller.userRoles[1],
+                        groupValue: controller.selectedRole.value,
+                        onChange: (UserRole? type) {
+                          controller.onChangeRole(type!);
+                        },
+                        label: controller.userRoles[1].roleName),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    controller.onChangeRole(controller.userRoles[2]);
+                  },
+                  child: Obx(
+                    () => CustomRadioListTile<UserRole>(
+                        value: controller.userRoles[2],
+                        groupValue: controller.selectedRole.value,
+                        onChange: (UserRole? type) {
+                          controller.onChangeRole(type!);
+                        },
+                        label: controller.userRoles[2].roleName),
                   ),
                 ),
                 const SizedBox(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:kitty_community_app/app/data/models/user_model/user_role.dart';
 import 'package:sizer/sizer.dart';
 
 import 'app/core/utils/local_storage/hive_storage.dart';
@@ -21,12 +23,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-
 final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
+final List<UserRole> roles = [
+  UserRole(roleId: "0", roleName: "Người chăm sóc thú cưng"),
+  UserRole(roleId: "1", roleName: "Chủ cửa hàng"),
+  UserRole(roleId: "2", roleName: "Bác sĩ thú y")
+];
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await initFirebase();
   await requestNotificationPermissions();
   const AndroidInitializationSettings initializationSettingsAndroid =
@@ -49,36 +57,34 @@ Future<void> main() async {
   });
 
   await HiveStorage().init();
-  await NetworkChecker.init();
+  // await NetworkChecker.init();
   runApp(
-    Sizer(
-      builder: (context, orientation, deviceType) {
-        return GetMaterialApp(
-          title: AppConstant.APP_NAME,
-          theme: DAppTheme.lightTheme,
-          darkTheme: DAppTheme.darkTheme,
-          themeMode: ThemeMode.system,
-          defaultTransition: Transition.rightToLeft,
-          transitionDuration: const Duration(milliseconds: 300),
-          fallbackLocale: LocalizationService.fallbackLocale,
-          translations: LocalizationService(),
-          locale: LocalizationService.locale,
-          supportedLocales: const <Locale>[
-            Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI),
-            Locale(LanguageCodeConstant.EN, LanguageCountryConstant.EN),
-          ],
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          debugShowCheckedModeBanner: false,
-          initialRoute: AppPages.INITIAL,
-          initialBinding: InitialBindings(),
-          getPages: AppPages.routes,
-        );
-      }
-    ),
+    Sizer(builder: (context, orientation, deviceType) {
+      return GetMaterialApp(
+        title: AppConstant.APP_NAME,
+        theme: DAppTheme.lightTheme,
+        darkTheme: DAppTheme.lightTheme,
+        themeMode: ThemeMode.system,
+        defaultTransition: Transition.rightToLeft,
+        transitionDuration: const Duration(milliseconds: 300),
+        fallbackLocale: LocalizationService.fallbackLocale,
+        translations: LocalizationService(),
+        locale: LocalizationService.locale,
+        supportedLocales: const <Locale>[
+          Locale(LanguageCodeConstant.VI, LanguageCountryConstant.VI),
+          Locale(LanguageCodeConstant.EN, LanguageCountryConstant.EN),
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppPages.INITIAL,
+        initialBinding: InitialBindings(),
+        getPages: AppPages.routes,
+      );
+    }),
   );
 }
 

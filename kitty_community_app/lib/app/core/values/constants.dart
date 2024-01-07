@@ -3,7 +3,7 @@
 import 'package:rive/rive.dart';
 
 class AppConstant {
-  static const String APP_NAME = 'Pvoil Station';
+  static const String APP_NAME = 'Pet Community';
 
   static const int TIME_OUT_SCAN_QRCODE = 120;
   // static const int DELAY_TRANSACTION_INQUIRY = 5;

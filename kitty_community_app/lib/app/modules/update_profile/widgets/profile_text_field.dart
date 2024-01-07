@@ -9,6 +9,8 @@ class ProfileTextField extends StatelessWidget {
     required this.prefixIcon,
     this.suffixIcon,
     this.readOnly = false,
+    this.validator,
+    this.keyboardType
   });
 
   final String label;
@@ -16,6 +18,8 @@ class ProfileTextField extends StatelessWidget {
   final Widget? prefixIcon;
   Widget? suffixIcon;
   bool readOnly;
+  String? Function(String?)? validator;
+  TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +51,12 @@ class ProfileTextField extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12)),
                     contentPadding:
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                    constraints: const BoxConstraints(maxHeight: 42),
                     prefixIcon: prefixIcon,
                     suffixIcon: suffixIcon
                   ),
+                validator: validator,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                keyboardType: keyboardType,
               )
             : AbsorbPointer(
                 child: TextFormField(

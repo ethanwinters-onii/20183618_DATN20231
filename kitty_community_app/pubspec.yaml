@@ -41,7 +41,7 @@ dependencies:
   dartz: ^0.10.1
 
   # for check internet connection
-  connectivity_plus: ^4.0.1
+  # connectivity_plus: ^4.0.1
 
   # for pickimage from gallery or camera
   image_picker: ^0.8.7+5
@@ -64,6 +64,11 @@ dependencies:
   flex_color_scheme: ^7.0.5
   sizer: ^2.0.15
   carousel_slider: ^4.2.1
+  emoji_picker_flutter: ^1.6.3
+  dotted_border: ^2.1.0
+
+  # for send notify
+  http: ^1.1.2
   
 
 dev_dependencies: 
@@ -85,3 +90,9 @@ flutter:
       - assets/images/
       - assets/rive/
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/logo.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true

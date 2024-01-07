@@ -1,11 +1,21 @@
 import 'package:get/get.dart';
-import 'package:kitty_community_app/app/modules/home/controllers/create_post_controller.dart';
-import 'package:kitty_community_app/app/modules/home/views/create_post_view.dart';
+import 'package:kitty_community_app/app/modules/event/controllers/create_event_controller.dart';
+import 'package:kitty_community_app/app/modules/event/controllers/event_detail_controller.dart';
+import 'package:kitty_community_app/app/modules/event/views/create_event_view.dart';
+import 'package:kitty_community_app/app/modules/event/views/event_detail_view.dart';
 
 import '../modules/chat/bindings/chat_binding.dart';
+import '../modules/chat/controllers/message_controller.dart';
 import '../modules/chat/views/chat_view.dart';
+import '../modules/chat/views/message_view.dart';
+import '../modules/event/bindings/event_binding.dart';
+import '../modules/event/views/event_view.dart';
 import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/controllers/create_post_controller.dart';
+import '../modules/home/controllers/post_detail_controller.dart';
+import '../modules/home/views/create_post_view.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/home/views/post_detail_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/notification/bindings/notification_binding.dart';
@@ -41,8 +51,14 @@ class AppPages {
     GetPage(
       name: _Paths.CREATE_POST,
       page: () => const CreatePostView(),
-      binding: BindingsBuilder(
-          () => Get.lazyPut<CreatePostController>(() => CreatePostController())),
+      binding: BindingsBuilder(() =>
+          Get.lazyPut<CreatePostController>(() => CreatePostController())),
+    ),
+    GetPage(
+      name: _Paths.POST_DETAIL,
+      page: () => const PostDetailView(),
+      binding: BindingsBuilder(() =>
+          Get.lazyPut<PostDetailController>(() => PostDetailController())),
     ),
     GetPage(
       name: _Paths.LOGIN,
@@ -70,6 +86,12 @@ class AppPages {
       binding: ChatBinding(),
     ),
     GetPage(
+      name: _Paths.MESSAGE,
+      page: () => const MessageView(),
+      binding: BindingsBuilder(
+          () => Get.lazyPut<MessageController>(() => MessageController())),
+    ),
+    GetPage(
       name: _Paths.P_SEARCH,
       page: () => const PSearchView(),
       binding: PSearchBinding(),
@@ -94,6 +116,23 @@ class AppPages {
       name: _Paths.UPDATE_PROFILE,
       page: () => const UpdateProfileView(),
       binding: UpdateProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.EVENT,
+      page: () => const EventView(),
+      binding: EventBinding(),
+    ),
+    GetPage(
+      name: _Paths.EVENT_DETAIL,
+      page: () => const EventDetailView(),
+      binding: BindingsBuilder(() =>
+          Get.lazyPut<EventDetailController>(() => EventDetailController())),
+    ),
+    GetPage(
+      name: _Paths.CREATE_EVENT,
+      page: () => const CreateEventView(),
+      binding: BindingsBuilder(() =>
+          Get.lazyPut<CreateEventController>(() => CreateEventController())),
     ),
   ];
 }

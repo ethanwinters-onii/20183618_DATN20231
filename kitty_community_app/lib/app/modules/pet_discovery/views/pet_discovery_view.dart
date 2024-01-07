@@ -17,7 +17,6 @@ class PetDiscoveryView extends GetView<PetDiscoveryController> {
   @override
   Widget build(BuildContext context) {
     return MainLayout<PetDiscoveryController>(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           'Discovery',
@@ -25,96 +24,99 @@ class PetDiscoveryView extends GetView<PetDiscoveryController> {
         ),
         centerTitle: true,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 8, left: 24, right: 24),
-            child: Obx(
-              () => TextField(
-                controller: controller.txtEditingController,
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: primaryColor),
-                        borderRadius: BorderRadius.circular(1000)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(1000)),
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: controller.onSearch.value
-                        ? InkWell(
-                            onTap: controller.removeSearch,
-                            child: const Icon(
-                              Icons.clear,
-                              color: Colors.black,
-                            ),
-                          )
-                        : null,
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 16)),
-                onChanged: (value) {
-                  controller.searchPet(value);
-                },
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 8, left: 24, right: 24),
+              child: Obx(
+                () => TextField(
+                  controller: controller.txtEditingController,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: primaryColor),
+                          borderRadius: BorderRadius.circular(1000)),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(1000)),
+                      prefixIcon: const Icon(Icons.search),
+                      suffixIcon: controller.onSearch.value
+                          ? InkWell(
+                              onTap: controller.removeSearch,
+                              child: const Icon(
+                                Icons.clear,
+                                color: Colors.black,
+                              ),
+                            )
+                          : null,
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 16)),
+                  onChanged: (value) {
+                    controller.searchPet(value);
+                  },
+                ),
               ),
             ),
-          ),
-          Obx(() => controller.petListOnSearch.isNotEmpty
-              ? SizedBox(
-                  width: 100.w,
-                  height: 40.h,
-                  child: PageView.builder(
-                    controller: controller.pageController,
-                    itemBuilder: (context, index) {
-                      final e = controller.petListOnSearch[
-                          index % controller.petListOnSearch.length];
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          Container(
-                            width: 100.w,
-                            height: 30.h,
-                            margin: const EdgeInsets.symmetric(horizontal: 24),
-                            child: Center(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(24),
-                                child: InkWell(
-                                  onTap: () {
-                                    Get.toNamed(Routes.PET_DETAIL,
-                                        arguments: e);
-                                  },
-                                  child: CachedNetworkImage(
-                                    imageUrl: e.avatar,
-                                    fit: BoxFit.cover,
+            Obx(() => controller.petListOnSearch.isNotEmpty
+                ? SizedBox(
+                    width: 100.w,
+                    height: 40.h,
+                    child: PageView.builder(
+                      controller: controller.pageController,
+                      itemBuilder: (context, index) {
+                        final e = controller.petListOnSearch[
+                            index % controller.petListOnSearch.length];
+                        return Column(
+                          children: [
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            Container(
+                              width: 100.w,
+                              height: 30.h,
+                              margin: const EdgeInsets.symmetric(horizontal: 24),
+                              child: Center(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(24),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.toNamed(Routes.PET_DETAIL,
+                                          arguments: e);
+                                    },
+                                    child: CachedNetworkImage(
+                                      imageUrl: e.avatar,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Text(
-                            controller.lang == "en" ? e.enName : e.vnName,
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      );
-                    },
-                  ),
-                )
-              : const SizedBox()),
-          Obx(() => controller.petListOnSearch.isNotEmpty
-              ? SizedBox(
-                  width: 100.w,
-                  height: 30.h,
-                  child: const RiveAnimation.asset(AssetsContants.kitty_splash),
-                )
-              : const SizedBox())
-        ],
+                            Text(
+                              controller.lang == "en" ? e.enName : e.vnName,
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        );
+                      },
+                    ),
+                  )
+                : const SizedBox()),
+            Obx(() => controller.petListOnSearch.isNotEmpty
+                ? SizedBox(
+                    width: 100.w,
+                    height: 30.h,
+                    child: const RiveAnimation.asset(AssetsContants.kitty_splash),
+                  )
+                : const SizedBox())
+          ],
+        ),
       ),
     );
   }

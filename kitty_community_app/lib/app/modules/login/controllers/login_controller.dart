@@ -87,7 +87,9 @@ class LoginController extends BaseController {
             deviceToken: token,
             avatar: userCredential?.additionalUserInfo?.profile?["picture"]
                 ["data"]["url"],
-            following: userCredential?.user?.uid == null ? [] : [userCredential!.user!.uid]
+            following: userCredential?.user?.uid == null ? [] : [userCredential!.user!.uid],
+            isOnline: true,
+            lastActive: DateTime.now().millisecondsSinceEpoch.toString()
         );
         await FirebaseProvider.createUser(newAccount);
         AccountLocalHelper.save(newAccount);
@@ -147,13 +149,15 @@ class LoginController extends BaseController {
               onFirstLogin: true,
               deviceToken: token,
               avatar: userCredential.additionalUserInfo?.profile?["picture"],
-              following: userCredential?.user?.uid == null ? [] : [userCredential!.user!.uid]
+              following: userCredential.user?.uid == null ? [] : [userCredential.user!.uid],
+              isOnline: true,
+              lastActive: DateTime.now().millisecondsSinceEpoch.toString()
           );
           await FirebaseProvider.createUser(newAccount);
           AccountLocalHelper.save(newAccount);
           Get.offAllNamed(Routes.UPDATE_PROFILE);
         } else {
-          final accountInfo = await FirebaseProvider.getUserById(userCredential?.user?.uid ?? "");
+          final accountInfo = await FirebaseProvider.getUserById(userCredential.user?.uid ?? "");
           if (accountInfo != null) {
             logger.d(accountInfo.toJson());
             AccountLocalHelper.save(accountInfo);
@@ -287,7 +291,9 @@ class LoginController extends BaseController {
               name: registerFullnameEdittingController.text.trim(),
               onFirstLogin: true,
               deviceToken: token,
-              following: credential.user?.uid == null ? [] : [credential.user!.uid]
+              following: credential.user?.uid == null ? [] : [credential.user!.uid],
+              isOnline: true,
+              lastActive: DateTime.now().millisecondsSinceEpoch.toString()
             );
             await FirebaseProvider.createUser(newAccount);
             AccountLocalHelper.save(newAccount);

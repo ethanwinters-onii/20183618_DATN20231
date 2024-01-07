@@ -33,6 +33,7 @@ class SplashscreenController extends GetxController {
       if (accountInfo != null) {
         logger.d(accountInfo.toJson());
         HiveStorage.box.put(LocalDBConstants.ACCOUNT_LOCAL, accountInfo);
+        await FirebaseProvider.updateActiveStatus(true);
         if (accountInfo.onFirstLogin == true) {
           Get.offAllNamed(Routes.UPDATE_PROFILE);
         } else {

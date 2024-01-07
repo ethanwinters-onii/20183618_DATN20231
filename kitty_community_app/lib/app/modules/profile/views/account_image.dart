@@ -29,7 +29,10 @@ class AccountImage extends StatelessWidget {
                 errorWidget: (context, _, __) => Container(
                   width: 8.h,
                   height: 8.h,
-                  color: Colors.red,
+                  child: Image.asset(
+                    "assets/icons/logo.png",
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 fit: BoxFit.cover,
                 width: 16.h,

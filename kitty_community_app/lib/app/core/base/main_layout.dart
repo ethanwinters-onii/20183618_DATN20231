@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kitty_community_app/app/core/theme/color_theme.dart';
 import '../values/enums/status.dart';
 import 'base_controller.dart';
 
@@ -10,12 +11,13 @@ class MainLayout<T extends BaseController> extends StatelessWidget {
     this.withImageBackground = false,
     required this.child,
     this.onClick,
-    this.backgroundColor = Colors.white,
+    this.backgroundColor = secondaryColor,
     Key? key,
     this.resizeToAvoidBottomInset,
     this.imageBackground,
     this.extendBody = true,
     this.indicator,
+    this.floatingButton
   }) : super(key: key);
   final Widget child;
   final PreferredSizeWidget? appBar;
@@ -27,6 +29,7 @@ class MainLayout<T extends BaseController> extends StatelessWidget {
   final Color backgroundColor;
   final Widget? indicator;
   final String? imageBackground;
+  final Widget? floatingButton;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +37,9 @@ class MainLayout<T extends BaseController> extends StatelessWidget {
       onTap: () => _onBackgroundPress(context),
       child: Scaffold(
         resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-        backgroundColor: backgroundColor,
+        backgroundColor: const Color(0xfffbf5fc),
         appBar: appBar,
+        floatingActionButton: floatingButton,
         body: Stack(
           children: [
             if (withImageBackground == true)

@@ -10,6 +10,9 @@ class PSearchController extends BaseController {
   RxList<String> accountIds = <String>[].obs;
   RxList<AccountInfo> accounts = <AccountInfo>[].obs;
 
+  RxList<AccountInfo> searchList = <AccountInfo>[].obs;
+  RxBool isSearching = false.obs;
+
   final accountLocal = AccountLocalHelper.get();
 
   @override
@@ -33,6 +36,11 @@ class PSearchController extends BaseController {
   void addAccount(AccountInfo account) {
     accounts.add(account);
     accountIds.add(account.userId!);
+    searchList.add(account);
+  }
+
+  void handleOnSearching() {
+    isSearching.value = !isSearching.value;
   }
 
   @override

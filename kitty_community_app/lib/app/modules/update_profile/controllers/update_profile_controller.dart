@@ -12,10 +12,12 @@ import 'package:kitty_community_app/app/core/utils/local_storage/hive_storage.da
 import 'package:kitty_community_app/app/core/utils/local_storage/local_db_constants.dart';
 import 'package:kitty_community_app/app/core/values/enums/status.dart';
 import 'package:kitty_community_app/app/data/models/user_model/account_info.dart';
+import 'package:kitty_community_app/app/data/models/user_model/user_role.dart';
 import 'package:kitty_community_app/app/data/providers/firebase/firebase_provider.dart';
 import 'package:kitty_community_app/app/global_widgets/app_bottom_sheet.dart';
 import 'package:kitty_community_app/app/modules/update_profile/widgets/image_picker_bottom_sheet.dart';
 import 'package:kitty_community_app/app/routes/app_pages.dart';
+import 'package:kitty_community_app/main.dart';
 import 'package:sizer/sizer.dart';
 
 class UpdateProfileController extends BaseController {
@@ -28,6 +30,9 @@ class UpdateProfileController extends BaseController {
   Rx<DateTime> selectedDate = DateTime.now().obs;
 
   Rx<String> avatarPath = "".obs;
+
+  final userRoles = roles;
+  Rx<UserRole> selectedRole = roles[0].obs;
 
   @override
   Future<void> initialData() {
@@ -43,6 +48,10 @@ class UpdateProfileController extends BaseController {
     descriptionEditingController.text = accountInfo.description ?? "";
     setStatus(Status.success);
     return super.initialData();
+  }
+
+  void onChangeRole(UserRole type) {
+    selectedRole.value = type;
   }
 
   void showDatePickerDialog(BuildContext context) async {
@@ -62,7 +71,7 @@ class UpdateProfileController extends BaseController {
   void handleSelectAvatar() async {
     Get.bottomSheet(
       AppBottomSheet(
-        height: 20.h,
+        height: 25.h,
         child: ImagePickerBottomSheet(
           onTakePhoto: handleTakePhoto,
           onPickGallery: handlePickImage,
@@ -102,7 +111,9 @@ class UpdateProfileController extends BaseController {
     await FirebaseProvider.updateUserInfo(
         newName: fullNameEditingController.text.trim(),
         newAbout: descriptionEditingController.text.trim(),
-        birthday: birthdayEditingController.text);
+        birthday: birthdayEditingController.text,
+        role: selectedRole.value.roleId
+    );
     setStatus(Status.success);
     Get.toNamed(Routes.WRAP);
   }

@@ -10,4 +10,6 @@ class FirebaseConstants {
   static FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
   static DatabaseReference ref = FirebaseDatabase.instance.ref();
   static FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+  static String apiKey =
+      "AAAAviUT5HQ:APA91bES3SqZ29tYxeniCTX2hWjzrkYsEsMYLSQuFbp78MAvg-myhT1H0JIoJDpsIgIpU9uj8GSiLq1YmVpGMEBAN0BNV8fV46kI4bbQjB94orXUwbvP4HLkeTIZrVWIkBf88sR1kD5G";
 }
